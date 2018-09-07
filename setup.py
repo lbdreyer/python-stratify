@@ -60,7 +60,7 @@ setup_args = dict(
         'Topic :: Scientific/Engineering',
         'Topic :: Scientific/Engineering :: GIS',
     ],
-    tests_require={'test': ['pytest']},
+    tests_require={'pytest'},
     test_suite='{}.tests'.format(NAME),
     zip_safe=False,
 )
