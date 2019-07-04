@@ -447,6 +447,8 @@ class _Interpolation(object):
                  rising=None,
                  interpolation=INTERPOLATE_LINEAR,
                  extrapolation=EXTRAPOLATE_NAN):
+        import cupy
+        print(cupy.__version__)
         import cupy as np
         print(np)
         self.interpolation = interpolation
