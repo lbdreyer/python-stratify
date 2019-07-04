@@ -3,8 +3,8 @@
 # z_src - the values of Z where fz_src is defined
 # z_target - the desired values of Z to generate new data for.
 # fz_src - the data, defined at each z_src
-import numpy as np
-
+#import numpy as np
+import cupy as cp
 
 
 __all__ = ['interpolate',
@@ -205,7 +205,7 @@ class NearestNInterpolator(Interpolator):
         """Compute a nearest-neighbour interpolation."""
         m = fz_src.shape[0]
 
-        if index != 0 and np.fabs(level - z_src[index - 1]) <= np.fabs(level - z_src[index]):
+        if index != 0 and np.abs(level - z_src[index - 1]) <= np.abs(level - z_src[index]):
             nearest_index = index - 1
         else:
             nearest_index = index
@@ -501,7 +501,7 @@ class _Interpolation(object):
         # the middle dimensions being from the axis argument.
 
         # Work out the shape of the left hand side of the 3d array.
-        lh_dim_size = ([1] + list(np.cumprod(z_src.shape)))[zp_axis]
+        lh_dim_size = ([1] + list(np.cumprod(np.array(z_src.shape))))[zp_axis]
 
         # The coordinate shape will therefore be (size of lhs, size of axis, the rest).
         new_shape = (lh_dim_size, z_src.shape[zp_axis], -1)
