@@ -154,8 +154,8 @@ class Interpolator(object):
         Parameters:
         ----------
         i (unsigned int) - the current (upper) index along z_src. 0 <= i < z_src.size[0]
-                  i will only ever be 0 if z_src[i] == current_level.
-                  the interpolation value may lie on exactly i, but will never lie on exactly i-1.
+        	i will only ever be 0 if z_src[i] == current_level.
+            the interpolation value may lie on exactly i, but will never lie on exactly i-1.
         z_src (double array) - the 1d column of z_src values.
         fz_src (2d double array) - the m 1d columns of fz_src values.
                                fz_src.shape[1] == z_src.shape[0].
@@ -196,7 +196,7 @@ class LinearInterpolator(Interpolator):
                     (z_src[index] - z_src[index - 1]))
 
             for i in range(m):
-               fz_target[i] = fz_src[i, index - 1] + \
+                fz_target[i] = fz_src[i, index - 1] + \
                                 frac * (fz_src[i, index] - fz_src[i, index - 1])
 
 
@@ -318,7 +318,7 @@ class LinearExtrapolator(Extrapolator):
             frac = ((level - z_src[p0]) / z_step)
 
         for i in range(m):
-           fz_target[i] = fz_src[i, p0] + frac * (fz_src[i, p1] - fz_src[i, p0])
+            fz_target[i] = fz_src[i, p0] + frac * (fz_src[i, p1] - fz_src[i, p0])
 
 
 class PyFuncExtrapolator(Extrapolator):
@@ -447,6 +447,8 @@ class _Interpolation(object):
                  rising=None,
                  interpolation=INTERPOLATE_LINEAR,
                  extrapolation=EXTRAPOLATE_NAN):
+        import cupy as np
+        print(np)
         self.interpolation = interpolation
         self.extrapolation = extrapolation
         # Cast data to numpy arrays if not already.
