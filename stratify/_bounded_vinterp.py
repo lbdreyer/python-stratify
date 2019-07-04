@@ -1,7 +1,7 @@
 from __future__ import absolute_import
 
 #import numpy as np
-import cupy as cp
+import cupy as np
 from ._conservative import conservative_interpolation
 
 

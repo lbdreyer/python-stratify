@@ -4,7 +4,7 @@
 # z_target - the desired values of Z to generate new data for.
 # fz_src - the data, defined at each z_src
 #import numpy as np
-import cupy as cp
+import cupy as np
 
 
 __all__ = ['interpolate',
