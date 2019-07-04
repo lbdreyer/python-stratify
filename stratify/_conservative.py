@@ -1,9 +1,7 @@
 import numpy as np
-cimport numpy as np
 
 
-cdef calculate_weights(np.ndarray[np.float64_t, ndim=2] src_point,
-                       np.ndarray[np.float64_t, ndim=2] tgt_point):
+def calculate_weights(src_point, tgt_point):
     """
     Calculate weights for a given point.
 
@@ -28,11 +26,6 @@ cdef calculate_weights(np.ndarray[np.float64_t, ndim=2] src_point,
         tgt_point.shape[0]].
 
     """
-    cdef Py_ssize_t src_ind, tgt_ind
-    cdef np.float64_t delta, weight
-    cdef np.ndarray[np.float64_t, ndim=2] weights
-    cdef np.ndarray[np.float64_t, ndim=1] src_cell, tgt_cell
-
     weights = np.zeros([src_point.shape[0], tgt_point.shape[0]],
                        dtype=np.float64)
     for src_ind, src_cell in enumerate(src_point):
@@ -45,9 +38,7 @@ cdef calculate_weights(np.ndarray[np.float64_t, ndim=2] src_point,
     return weights
 
 
-cdef apply_weights(np.ndarray[np.float64_t, ndim=3] src_point,
-                   np.ndarray[np.float64_t, ndim=3] tgt_point,
-                   np.ndarray[np.float64_t, ndim=3] src_data):
+def apply_weights(src_point, tgt_point, src_data):
     """
     Perform conservative interpolation.
 
@@ -71,9 +62,6 @@ cdef apply_weights(np.ndarray[np.float64_t, ndim=3] src_point,
         Taking the form [broadcasting_dims, axis_interpolation, z_varying].
 
     """
-    cdef Py_ssize_t ind
-    cdef np.ndarray[np.float64_t, ndim=3] results, weighted_contrib
-    cdef np.ndarray[np.float64_t, ndim=2] weights
     results = np.zeros(
         [src_data.shape[0], tgt_point.shape[0], src_data.shape[2]],
         dtype='float64')

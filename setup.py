@@ -5,23 +5,23 @@ import os
 
 import numpy as np
 
-from Cython.Build import cythonize
+#from Cython.Build import cythonize
 
 
 NAME = 'stratify'
 DIR = os.path.abspath(os.path.dirname(__file__))
 
-extension_kwargs = {'include_dirs': [np.get_include()]}
-cython_coverage_enabled = os.environ.get('CYTHON_COVERAGE', None)
-if cython_coverage_enabled:
-    extension_kwargs.update({'define_macros': [('CYTHON_TRACE_NOGIL', '1')]})
+#extension_kwargs = {'include_dirs': [np.get_include()]}
+#cython_coverage_enabled = os.environ.get('CYTHON_COVERAGE', None)
+#if cython_coverage_enabled:
+#    extension_kwargs.update({'define_macros': [('CYTHON_TRACE_NOGIL', '1')]})
 
-extensions = [Extension('{}._vinterp'.format(NAME),
-                        [os.path.join(NAME, '_vinterp.pyx')],
-                        **extension_kwargs),
-              Extension('{}._conservative'.format(NAME),
-                        [os.path.join(NAME, '_conservative.pyx')],
-                        **extension_kwargs)]
+#extensions = [Extension('{}._vinterp'.format(NAME),
+#                        [os.path.join(NAME, '_vinterp.pyx')],
+#                        **extension_kwargs),
+#              Extension('{}._conservative'.format(NAME),
+#                        [os.path.join(NAME, '_conservative.pyx')],
+#                        **extension_kwargs)]
 
 def extract_version():
     version = None
@@ -41,8 +41,8 @@ setup_args = dict(
                  'Nd vertical interpolation/stratification of atmospheric '
                  'and oceanographic datasets'),
     version=extract_version(),
-    ext_modules=cythonize(extensions, compiler_directives={'linetrace': True,
-                                                           'binding': True}),
+    #ext_modules=cythonize(extensions, compiler_directives={'linetrace': True,
+    #                                                       'binding': True}),
     packages=find_packages(),
     classifiers=[
         'Development Status :: 3 - Alpha',
