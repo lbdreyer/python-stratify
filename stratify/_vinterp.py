@@ -4,7 +4,7 @@
 # z_target - the desired values of Z to generate new data for.
 # fz_src - the data, defined at each z_src
 import numpy as np
-
+import numba
 
 
 __all__ = ['interpolate',
@@ -564,7 +564,8 @@ class _Interpolation(object):
 
         self.interpolation = interpolation
         self.extrapolation = extrapolation
-
+    
+    @numba.njit()
     def interpolate(self):
         # Construct the output array for the interpolation to fill in.
         fz_target = np.empty(self._result_working_shape, dtype=np.float64)
